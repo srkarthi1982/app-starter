@@ -2,10 +2,17 @@
 import { createHmac } from "node:crypto";
 
 const getEnv = (key: string): string | undefined => {
-  const metaEnv =
-    typeof import.meta !== "undefined" &&
-    (import.meta as { env?: Record<string, string> }).env;
-  if (metaEnv?.[key]) return metaEnv[key];
+  // Supports both Astro's import.meta.env and Node's process.env (e.g. when running seeds)
+  let metaEnv: Record<string, string> | undefined;
+
+  if (typeof import.meta !== "undefined") {
+    const envWrapper = import.meta as { env?: Record<string, string> };
+    metaEnv = envWrapper.env;
+  }
+
+  if (metaEnv && key in metaEnv) {
+    return metaEnv[key];
+  }
 
   const nodeEnv = typeof process !== "undefined" ? process.env : undefined;
   return nodeEnv?.[key];
