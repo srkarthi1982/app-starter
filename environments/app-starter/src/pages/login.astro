@@ -1,0 +1,67 @@
+---
+import AppShell from "../layouts/AppShell.astro";
+import {
+  AvContainer,
+  AvCard,
+  AvBrand,
+  AvInput,
+  AvButton,
+  AvCheckbox
+} from "@ansiversa/components";
+---
+
+<AppShell title="Login">
+  <AvContainer class="as-login">
+    <AvCard class="as-login__card">
+      <div class="as-brand">
+        <AvBrand />
+      </div>
+
+      <form class="as-form">
+        <AvInput name="email" type="email" placeholder="Email" />
+        <AvInput name="password" type="password" placeholder="Password" />
+
+        <div class="as-form__row">
+          <AvCheckbox label="Remember me" />
+        </div>
+
+        <AvButton type="submit" class="as-submit">Sign In</AvButton>
+      </form>
+    </AvCard>
+  </AvContainer>
+</AppShell>
+
+<style>
+  .as-login {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .as-login__card {
+    max-width: 28rem;
+    width: 100%;
+  }
+
+  .as-brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .as-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .as-form__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .as-submit {
+    width: 100%;
+  }
+</style>
