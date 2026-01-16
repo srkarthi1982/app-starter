@@ -20,6 +20,9 @@ npm ci
 - `ASTRO_DB_REMOTE_URL`
 - `ASTRO_DB_APP_TOKEN`
 - `PUBLIC_ROOT_APP_URL` (optional)
+- `PARENT_APP_URL` (optional)
+
+Note: `ANSIVERSA_AUTH_SECRET` is reserved for future auth workflows (not used in this starter yet).
 
 3) Run the app
 

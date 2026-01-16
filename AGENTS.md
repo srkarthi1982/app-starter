@@ -43,3 +43,4 @@ Defined in `db/tables.ts`:
 ## 4. Task Log (Newest first)
 
 - 2026-01-16 App-starter rebuilt from quiz golden base; example CRUD module added; README/AGENTS updated.
+- 2026-01-16 AppShell now calls local notification proxy; env docs updated with PARENT_APP_URL and auth secret note.

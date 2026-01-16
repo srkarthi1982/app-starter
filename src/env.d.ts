@@ -21,6 +21,9 @@ interface ImportMetaEnv {
 
   /** Optional: Override the root app URL (fallback: https://ansiversa.com) */
   readonly PUBLIC_ROOT_APP_URL?: string;
+
+  /** Optional: Parent app URL (fallback to root app URL) */
+  readonly PARENT_APP_URL?: string;
 }
 
 interface Window {
