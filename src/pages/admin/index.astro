@@ -1,0 +1,23 @@
+---
+import { AvButton, AvCard } from "@ansiversa/components";
+import AppAdminShell from "../../layouts/AppAdminShell.astro";
+---
+
+<AppAdminShell
+  title="Administration – Ansiversa"
+  description="Admin overview for the starter app."
+  crumbItems={[{ label: "Home", href: "/" }, { label: "Administration" }]}
+>
+  <AvCard variant="soft" className="av-auth-stack-md">
+    <div class="av-row-between">
+      <div>
+        <p class="av-kicker">Admin</p>
+        <h1 class="av-section-title">Administration</h1>
+        <p class="av-text-soft">Manage example items or extend with your own modules.</p>
+      </div>
+      <div class="av-row-wrap">
+        <AvButton href="/admin/items">View items</AvButton>
+      </div>
+    </div>
+  </AvCard>
+</AppAdminShell>

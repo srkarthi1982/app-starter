@@ -1,121 +1,48 @@
-# Ansiversa Mini-App Starter
+# Ansiversa App Starter
 
-This repository is the official starter template for all **Ansiversa Mini-Apps**.  
-Every app in the Ansiversa ecosystem begins with this structure—clean, fast, and consistent.
+This repo is the official starter template for Ansiversa mini-apps. It contains the standard
+middleware auth guard, shared AppShell/AppAdminShell layouts, unread notifications badge wiring,
+and a small Example Items module that demonstrates end-to-end CRUD.
 
-If you are a developer or contributor, you can use this template to build any app in the ecosystem.
+## Quick start
 
----
-
-## 🚀 Features
-
-- **Astro 5** — blazing-fast frontend framework  
-- **Tailwind CSS** — utility-first styling  
-- **@ansiversa/components** — shared UI library for unified design  
-- **Global Styles** — imported automatically from the components package  
-- **Clean File Structure** — easy to extend for any type of app  
-- **Ready for Deployment** — optimized for Vercel out of the box  
-
----
-
-## 📁 Project Structure
+1) Install dependencies
 
 ```
-app/
- ├── public/
- ├── src/
- │   ├── layouts/
- │   │   └── AppShell.astro
- │   └── pages/
- │       ├── index.astro
- │       └── login.astro
- ├── astro.config.mjs
- ├── package.json
- ├── tsconfig.json
- ├── postcss.config.cjs
- └── tailwind.config.cjs
+npm ci
 ```
 
----
+2) Configure env vars (see `src/env.d.ts` for the full list)
 
-## 🧩 Using Ansiversa Components
+- `ANSIVERSA_AUTH_SECRET`
+- `ANSIVERSA_SESSION_SECRET`
+- `ANSIVERSA_COOKIE_DOMAIN`
+- `ASTRO_DB_REMOTE_URL`
+- `ASTRO_DB_APP_TOKEN`
+- `PUBLIC_ROOT_APP_URL` (optional)
 
-All apps share the same UI look and feel using:
+3) Run the app
 
-```ts
-import "@ansiversa/components/styles/global.css";
-import { WebLayout, AuthLayout } from "@ansiversa/components";
 ```
-
-This ensures:
-
-- Perfect consistency across **100+ apps**
-- Unified branding  
-- Fully reusable layouts and UI blocks  
-
----
-
-## ▶️ Running Locally
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Start the development server:
-
-```bash
 npm run dev
 ```
 
-Build for production:
+## Commands
 
-```bash
-npm run build
-```
+- `npm run dev`
+- `npm run typecheck` (Astro check)
+- `npm run build --remote`
 
-Preview production build:
+## Example module
 
-```bash
-npm run preview
-```
+Example Items live under `src/modules/example-items/` with routes at:
 
----
+- `/items`
+- `/items/[id]`
+- `/admin/items`
 
-## 🌐 Deployment
-
-Ansiversa apps are optimized for **Vercel**:
-
-- No configuration required
-- Astro server output ready
-- CI/CD supported automatically
-
-Just link your repo to Vercel → deploy.
+Delete `src/modules/example-items/` and these routes when starting a real app.
 
 ---
 
-## 🔗 About Ansiversa
-
-Ansiversa is a curated ecosystem of 100+ premium mini-apps designed for learning, productivity, writing, creativity, utilities, wellness, and more.
-
-Each app shares:
-
-- One global design language  
-- One component system  
-- One identity  
-- Premium UX  
-
-You are currently viewing the official **starter template** that powers all apps.
-
----
-
-## 🤝 Contributing
-
-If you wish to contribute to this template or suggest improvements, please open an issue or submit a pull request.
-
----
-
-## 📄 License
-
-MIT License — free to use and modify.
+Ansiversa motto: Make it simple — but not simpler.

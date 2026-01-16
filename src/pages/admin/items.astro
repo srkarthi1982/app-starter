@@ -1,0 +1,141 @@
+---
+import { AvButton, AvCard, AvInput, AvTable, AvTableToolbar } from "@ansiversa/components";
+import { actions } from "astro:actions";
+import AppAdminShell from "../../layouts/AppAdminShell.astro";
+
+const listResult = await Astro.callAction(actions.exampleItems.adminListItems, {
+  page: 1,
+  pageSize: 25,
+});
+
+const data = (listResult as any)?.data ?? (listResult as any) ?? {};
+const items = data?.items ?? [];
+const total = data?.total ?? 0;
+const page = data?.page ?? 1;
+const pageSize = data?.pageSize ?? 25;
+
+const initialState = {
+  items,
+  total,
+  page,
+  pageSize,
+  query: "",
+  loading: false,
+  error: null,
+  success: null,
+};
+---
+
+<AppAdminShell
+  title="Example Items – Admin"
+  description="Manage all example items."
+  crumbItems={[
+    { label: "Home", href: "/" },
+    { label: "Administration", href: "/admin" },
+    { label: "Example Items" },
+  ]}
+>
+  <div
+    class="av-auth-stack-lg"
+    x-data="$store.adminExampleItems"
+    x-init="init && init(JSON.parse($el.dataset.initial))"
+    data-initial={JSON.stringify(initialState)}
+  >
+    <AvCard variant="soft" className="av-auth-stack-sm">
+      <AvTableToolbar title="Example Items">
+        <div slot="title" class="av-admin-titlewrap">
+          <h1 class="av-table-toolbar__title">
+            Example Items <span class="av-admin-count-inline" x-text="`(${total})`"></span>
+          </h1>
+        </div>
+
+        <div slot="search">
+          <div class="av-admin-toolbar-left">
+            <p class="av-table-toolbar__subtitle av-m-0">All user items.</p>
+            <AvInput
+              name="item-search"
+              type="search"
+              placeholder="Search by title…"
+              x-model="query"
+              @input="setQuery($event.target.value)"
+            />
+          </div>
+        </div>
+      </AvTableToolbar>
+
+      <template x-if="error">
+        <p class="av-error" role="alert" x-text="error"></p>
+      </template>
+      <template x-if="success">
+        <p class="av-success" role="status" x-text="success"></p>
+      </template>
+
+      <AvTable>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>User</th>
+            <th>Updated</th>
+            <th>Status</th>
+            <th class="av-table__th-actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template x-for="row in items" :key="row.id">
+            <tr>
+              <td>
+                <div class="av-auth-stack-xxs">
+                  <p class="av-table__cell-strong" x-text="row.title"></p>
+                  <p class="av-table__cell-muted" x-text="row.content || 'No notes'"></p>
+                </div>
+              </td>
+              <td class="av-table__cell-muted" x-text="row.userId"></td>
+              <td
+                class="av-table__cell-muted"
+                x-text="new Date(row.updatedAt || row.createdAt).toLocaleString()"
+              ></td>
+              <td>
+                <span class="av-badge av-badge-soft" x-text="row.isArchived ? 'Archived' : 'Active'"></span>
+              </td>
+              <td class="av-table__cell-actions">
+                <AvButton
+                  size="sm"
+                  variant="ghost"
+                  type="button"
+                  @click.prevent="deleteItem(row.id)"
+                  :disabled="loading"
+                >
+                  Delete
+                </AvButton>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </AvTable>
+
+      <div class="av-row-between av-mt-sm">
+        <p class="av-text-soft">Page <span x-text="page"></span> of <span x-text="totalPages"></span></p>
+        <div class="av-row-wrap">
+          <AvButton
+            size="sm"
+            variant="ghost"
+            type="button"
+            @click.prevent="setPage(page - 1)"
+            :disabled="page <= 1 || loading"
+          >
+            Previous
+          </AvButton>
+          <AvButton
+            size="sm"
+            variant="ghost"
+            type="button"
+            @click.prevent="setPage(page + 1)"
+            :disabled="page >= totalPages || loading"
+          >
+            Next
+          </AvButton>
+        </div>
+      </div>
+    </AvCard>
+  </div>
+</AppAdminShell>

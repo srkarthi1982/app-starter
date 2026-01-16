@@ -7,11 +7,14 @@ const COOKIE_DOMAIN =
 
 // Root app URL
 const ROOT_APP_URL =
-  import.meta.env.PUBLIC_ROOT_APP_URL ?? `https://${COOKIE_DOMAIN}`;
+  import.meta.env.PUBLIC_ROOT_APP_URL ??
+  (import.meta.env.DEV ? "http://localhost:2000" : `https://${COOKIE_DOMAIN}`);
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const { cookies, locals, url } = context;
   const pathname = url.pathname;
+
+  const publicRoutes = new Set(["/"]);
 
   // Allow static assets
   if (
@@ -36,11 +39,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
     const payload = verifySessionToken(token);
 
     if (payload?.userId) {
+      const roleId = payload.roleId ? Number(payload.roleId) : undefined;
+
       locals.user = {
         id: payload.userId,
         email: payload.email,
         name: payload.name,
-        roleId: payload.roleId ?? undefined,
+        roleId: Number.isFinite(roleId) ? roleId : undefined,
         stripeCustomerId: payload.stripeCustomerId ?? undefined,
       };
 
@@ -55,9 +60,19 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   // ✅ ENFORCE AUTH (protect everything in mini-app)
   if (!locals.isAuthenticated) {
+    if (publicRoutes.has(pathname)) {
+      return next();
+    }
     const loginUrl = new URL("/login", ROOT_APP_URL);
-    loginUrl.searchParams.set("returnTo", url.toString()); // ✅ full URL back to quiz
+    loginUrl.searchParams.set("returnTo", url.toString()); // ✅ full URL back to app starter
     return context.redirect(loginUrl.toString());
+  }
+
+  if (pathname.startsWith("/admin")) {
+    const roleId = Number(locals.user?.roleId);
+    if (!Number.isFinite(roleId) || roleId !== 1) {
+      return context.redirect("/");
+    }
   }
 
   return next();

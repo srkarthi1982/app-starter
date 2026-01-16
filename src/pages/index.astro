@@ -1,23 +1,32 @@
 ---
+import { AvButton, AvCard, AvContainer } from "@ansiversa/components";
 import AppShell from "../layouts/AppShell.astro";
-import { AvContainer, AvButton } from "@ansiversa/components";
+
+const title = "Ansiversa App Starter";
+const description = "A golden mini-app starter with shared shells, auth guard, and example CRUD.";
 ---
 
-<AppShell title="Ansiversa App Starter" description="A starter template using shared Ansiversa components.">
-    <!-- Hero -->
-  <section class="av-hero">
-    <AvContainer size="narrow" className="av-hero__content--narrow">
-      <div class="av-hero__content">
-        <div class="av-kicker">
-          <span>Ansiversa Ecosystem</span>
-        </div>
-        <h1 class="av-gradient-text">Ansiversa App Starter</h1>
-        <p>
-          This project uses the shared @ansiversa/components package and global design system. Use this starter as a base for your next mini-app in the Ansiversa universe.
-        </p>
-      </div>
-      <div class="av-cta-row">
-        <AvButton href="https://www.ansiversa.com">Visit Ansiversa</AvButton>
+<AppShell title={title} description={description}>
+  <section class="av-section">
+    <AvContainer>
+      <div class="av-auth-stack-lg">
+        <AvCard className="av-auth-card">
+          <div class="av-auth-stack-md">
+            <div class="av-auth-stack-xs">
+              <p class="av-kicker">App Starter</p>
+              <h1 class="av-section-title">Build your next mini-app faster</h1>
+              <p class="av-text-soft">
+                This repo is the official Ansiversa seed. It includes shared layout shells, auth
+                guard, notifications badge wiring, and a deletable Example Items module.
+              </p>
+            </div>
+
+            <div class="av-row-wrap">
+              <AvButton href="/items">Open Example Items</AvButton>
+              <AvButton href="/admin/items" variant="ghost">Admin Items</AvButton>
+            </div>
+          </div>
+        </AvCard>
       </div>
     </AvContainer>
   </section>
