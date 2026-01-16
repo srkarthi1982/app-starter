@@ -14,6 +14,7 @@ This file records what was built/changed so far for the app-starter repo. Read f
 - Shared layouts: `AppShell.astro` and `AppAdminShell.astro`.
 - Notification unread count fetched in AppShell via parent API (SSR).
 - One global Alpine store per app pattern.
+ - Includes Example Items CRUD (user + admin) and a minimal starter landing.
 
 ---
 

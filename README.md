@@ -43,6 +43,20 @@ Example Items live under `src/modules/example-items/` with routes at:
 
 Delete `src/modules/example-items/` and these routes when starting a real app.
 
+## Starting a new mini-app
+
+1) Clone this repo.
+2) Remove the Example Items module and routes.
+3) Add your domain tables/actions/pages.
+4) Keep shared shells + middleware patterns unchanged.
+
+### Must keep (standards)
+
+- `src/layouts/AppShell.astro` and `src/layouts/AppAdminShell.astro`
+- `src/middleware.ts` auth guard + admin role gate
+- AppShell unread notifications fetch (`/api/notifications/unread-count`)
+- One global Alpine store pattern (`src/alpine.ts`)
+
 ---
 
 Ansiversa motto: Make it simple — but not simpler.
