@@ -4,6 +4,10 @@ This repo is the official starter template for Ansiversa mini-apps. It contains 
 middleware auth guard, shared AppShell/AppAdminShell layouts, unread notifications badge wiring,
 and a small Example Items module that demonstrates end-to-end CRUD.
 
+## Freeze status
+
+Starter Freeze Jan-17-2026 (locked baseline).
+
 ## Quick start
 
 1) Install dependencies
