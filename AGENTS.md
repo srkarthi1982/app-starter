@@ -42,6 +42,8 @@ Defined in `db/tables.ts`:
 
 ## 4. Task Log (Newest first)
 
+- 2026-01-17 Fixed typecheck errors by tightening auth guard typing and SSR items typing.
+- 2026-01-17 Updated admin items description and README command list for current scripts.
 - 2026-01-17 Removed unused user sort branches and required cookie domain in prod.
 - 2026-01-17 Aligned env typing and admin items copy with standards; enforced prod session secret check.
 - 2026-01-17 Rebuilt admin landing to match web layout with a single Items card.

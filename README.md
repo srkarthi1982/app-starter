@@ -31,8 +31,11 @@ npm run dev
 ## Commands
 
 - `npm run dev`
+- `npm run dev:remote`
 - `npm run typecheck` (Astro check)
-- `npm run build --remote`
+- `npm run build`
+- `npm run build:remote`
+- `npm run db:push:local`
 
 ## Example module
 

@@ -7,6 +7,7 @@ import {
 } from "@ansiversa/components";
 import { actions } from "astro:actions";
 import AppShell from "../../layouts/AppShell.astro";
+import type { ExampleItemDTO } from "../../modules/example-items/types";
 
 const title = "Example Items – Ansiversa";
 const description = "View your example items.";
@@ -17,7 +18,7 @@ const listResult = await Astro.callAction(actions.exampleItems.fetchMyItems, {
 });
 
 const data = (listResult as any)?.data ?? (listResult as any) ?? {};
-const items = data?.items ?? [];
+const items = (data?.items ?? []) as ExampleItemDTO[];
 
 const total = items.length;
 ---
@@ -71,7 +72,7 @@ const total = items.length;
                   </div>
                   <p class="av-text-soft">
                     {item.updatedAt || item.createdAt
-                      ? `Updated ${new Date(item.updatedAt || item.createdAt).toLocaleString()}`
+                      ? `Updated ${new Date(item.updatedAt || item.createdAt || "").toLocaleString()}`
                       : "Updated —"}
                   </p>
                 </div>
