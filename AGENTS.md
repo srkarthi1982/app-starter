@@ -42,6 +42,7 @@ Defined in `db/tables.ts`:
 
 ## 4. Task Log (Newest first)
 
+- 2026-01-17 Added DEV_BYPASS_AUTH env defaults to enable local dummy session.
 - 2026-01-17 Expanded public routes/static allowlist and simplified admin role check in middleware.
 - 2026-01-17 Added DEV_BYPASS_AUTH dummy session injection for community development.
 - 2026-01-17 Added freeze note to README and AGENTS (Starter Freeze Jan-17-2026).
