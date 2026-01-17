@@ -32,6 +32,26 @@ Note: `ANSIVERSA_AUTH_SECRET` is reserved for future auth workflows (not used in
 npm run dev
 ```
 
+## Local dev without parent app
+
+If you do not have the parent app session cookie, you can enable a DEV-only auth bypass
+to inject a dummy session during local development:
+
+```
+DEV_BYPASS_AUTH=true npm run dev
+```
+
+Optional overrides (defaults shown):
+
+```
+DEV_BYPASS_USER_ID=dev-user
+DEV_BYPASS_EMAIL=dev@local
+DEV_BYPASS_ROLE_ID=1
+```
+
+⚠️ This bypass only works in local development (import.meta.env.DEV) and is ignored in
+production builds.
+
 ## Commands
 
 - `npm run dev`

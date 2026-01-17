@@ -18,6 +18,18 @@ interface ImportMetaEnv {
 
   /** Optional: Parent app URL (fallback to root app URL) */
   readonly PARENT_APP_URL?: string;
+
+  /** Optional: Dev-only auth bypass (requires import.meta.env.DEV) */
+  readonly DEV_BYPASS_AUTH?: string;
+
+  /** Optional: Dev-only override for bypass user id */
+  readonly DEV_BYPASS_USER_ID?: string;
+
+  /** Optional: Dev-only override for bypass user email */
+  readonly DEV_BYPASS_EMAIL?: string;
+
+  /** Optional: Dev-only override for bypass user role id */
+  readonly DEV_BYPASS_ROLE_ID?: string;
 }
 
 interface Window {
