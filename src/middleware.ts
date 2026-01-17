@@ -61,6 +61,25 @@ export const onRequest = defineMiddleware(async (context, next) => {
     }
   }
 
+  const isDevBypassEnabled =
+    import.meta.env.DEV && import.meta.env.DEV_BYPASS_AUTH === "true";
+
+  if (!locals.isAuthenticated && isDevBypassEnabled) {
+    const devUserId = import.meta.env.DEV_BYPASS_USER_ID || "dev-user";
+    const devEmail = import.meta.env.DEV_BYPASS_EMAIL || "dev@local";
+    const devRoleIdRaw = import.meta.env.DEV_BYPASS_ROLE_ID;
+    const parsedRoleId = devRoleIdRaw ? Number.parseInt(devRoleIdRaw, 10) : NaN;
+    const devRoleId = Number.isFinite(parsedRoleId) ? parsedRoleId : 1;
+
+    locals.user = {
+      id: devUserId,
+      email: devEmail,
+      roleId: devRoleId,
+    };
+    locals.sessionToken = null;
+    locals.isAuthenticated = true;
+  }
+
   // ✅ ENFORCE AUTH (protect everything in mini-app)
   if (!locals.isAuthenticated) {
     if (publicRoutes.has(pathname)) {

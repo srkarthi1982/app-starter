@@ -42,6 +42,7 @@ Defined in `db/tables.ts`:
 
 ## 4. Task Log (Newest first)
 
+- 2026-01-17 Added DEV_BYPASS_AUTH dummy session injection for community development.
 - 2026-01-17 Added freeze note to README and AGENTS (Starter Freeze Jan-17-2026).
 - 2026-01-17 Fixed typecheck errors by tightening auth guard typing and SSR items typing.
 - 2026-01-17 Updated admin items description and README command list for current scripts.
