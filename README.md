@@ -32,6 +32,21 @@ Note: `ANSIVERSA_AUTH_SECRET` is reserved for future auth workflows (not used in
 npm run dev
 ```
 
+## How this starter works (mental model)
+
+Ansiversa apps run in two layers:
+
+- **Parent app** (ansiversa.com)
+  - Owns authentication, users, billing, notifications
+  - Issues a shared session cookie
+- **Mini-apps** (quiz.ansiversa.com, etc.)
+  - Trust the shared session cookie
+  - Never implement their own auth
+  - Use shared layouts and middleware
+
+This starter simulates that environment so you can build a mini-app without needing
+the parent app locally.
+
 ## Local dev without parent app
 
 If you do not have the parent app session cookie, you can enable a DEV-only auth bypass
@@ -51,6 +66,20 @@ DEV_BYPASS_ROLE_ID=1
 
 ⚠️ This bypass only works in local development (import.meta.env.DEV) and is ignored in
 production builds.
+
+After starting the dev server, open a protected route like `/items` or `/admin/items`
+to confirm the dummy session is active.
+
+## First run checklist
+
+You should be able to:
+
+- Start the app with `npm run dev`
+- Open `/items` and see the Example Items list
+- Open `/admin/items` and access admin CRUD (roleId = 1)
+- See no redirects to the parent login when DEV_BYPASS_AUTH is enabled
+
+If this works, your setup is correct.
 
 ## Commands
 
@@ -78,12 +107,15 @@ Delete `src/modules/example-items/` and these routes when starting a real app.
 3) Add your domain tables/actions/pages.
 4) Keep shared shells + middleware patterns unchanged.
 
-### Must keep (standards)
+### Non-negotiable standards
+
+These files define the Ansiversa contract. Do not modify or replace them.
 
 - `src/layouts/AppShell.astro` and `src/layouts/AppAdminShell.astro`
 - `src/middleware.ts` auth guard + admin role gate
 - AppShell unread notifications fetch (`/api/notifications/unread-count`)
 - One global Alpine store pattern (`src/alpine.ts`)
+- Always update `AGENTS.md` when completing a task
 
 ---
 
