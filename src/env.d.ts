@@ -1,12 +1,6 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
-  /** Astro DB remote URL for Turso/libSQL */
-  readonly ASTRO_DB_REMOTE_URL: string;
-
-  /** Astro DB Application Token for remote access */
-  readonly ASTRO_DB_APP_TOKEN: string;
-
   /** Secret used for JWT / session signing */
   readonly ANSIVERSA_AUTH_SECRET: string;
 

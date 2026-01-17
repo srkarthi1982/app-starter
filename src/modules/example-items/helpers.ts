@@ -3,6 +3,7 @@ import type { ExampleItemDTO } from "./types";
 export type ExampleItemRow = {
   id: string;
   userId: string;
+  userName?: string | null;
   title: string;
   content?: string | null;
   isArchived: boolean;
@@ -13,6 +14,7 @@ export type ExampleItemRow = {
 export const normalizeExampleItem = (row: ExampleItemRow): ExampleItemDTO => ({
   id: row.id,
   userId: row.userId,
+  userName: row.userName ?? null,
   title: row.title,
   content: row.content ?? null,
   isArchived: row.isArchived ?? false,

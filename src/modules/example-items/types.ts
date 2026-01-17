@@ -1,6 +1,7 @@
 export type ExampleItemDTO = {
   id: string;
   userId: string;
+  userName?: string | null;
   title: string;
   content: string | null;
   isArchived: boolean;

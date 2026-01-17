@@ -42,5 +42,18 @@ Defined in `db/tables.ts`:
 
 ## 4. Task Log (Newest first)
 
+- 2026-01-17 Rebuilt admin landing to match web layout with a single Items card.
+- 2026-01-17 Switched dev/build to persistent local DB using file-based remote mode; added db push script.
+- 2026-01-17 Set admin items pagination to 10 per page.
+- 2026-01-17 Tightened /items breadcrumb spacing using existing crumb styles.
+- 2026-01-17 Added breadcrumb to /items SSR page.
+- 2026-01-17 Made /items page read-only SSR list (removed create/update/delete UI).
+- 2026-01-17 Exported adminCreateItem action to fix admin item creation.
+- 2026-01-17 Added admin items create/edit drawer, user-name display, and per-user filtering to mirror roles page behavior.
+- 2026-01-17 Added sorting and toolbar actions on admin items to match roles page.
+- 2026-01-17 Aligned admin items page layout with web roles pattern (toolbar, empty state, pager, confirm dialog).
+- 2026-01-17 Switched local dev/build scripts to non-remote Astro DB; added remote scripts.
+- 2026-01-17 Verified local Astro DB via shell; created ExampleItem table and inserted a test row.
+- 2026-01-17 Removed remote Astro DB credentials to use local DB defaults.
 - 2026-01-16 App-starter rebuilt from quiz golden base; example CRUD module added; README/AGENTS updated.
 - 2026-01-16 AppShell now calls local notification proxy; env docs updated with PARENT_APP_URL and auth secret note.

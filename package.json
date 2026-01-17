@@ -4,13 +4,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev --remote",
-    "build": "astro build --remote",
+    "dev": "ASTRO_DB_REMOTE_URL=file:$PWD/.astro/content.db astro dev --remote",
+    "build": "ASTRO_DB_REMOTE_URL=file:$PWD/.astro/content.db astro build --remote",
     "typecheck": "astro check",
     "typecheck:tsc": "tsc --noEmit",
     "check": "npm run typecheck && npm run build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "build:remote": "astro build --remote",
+    "dev:remote": "astro dev --remote",
+    "db:push:local": "ASTRO_DB_REMOTE_URL=file:$PWD/.astro/content.db astro db push --remote"
   },
   "dependencies": {
     "@ansiversa/components": "^0.0.105",

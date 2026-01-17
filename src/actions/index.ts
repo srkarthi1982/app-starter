@@ -1,4 +1,5 @@
 import {
+  adminCreateItem,
   adminDeleteItem,
   adminListItems,
   adminUpdateItem,
@@ -14,6 +15,7 @@ export const exampleItems = {
   updateMyItem,
   deleteMyItem,
   adminListItems,
+  adminCreateItem,
   adminUpdateItem,
   adminDeleteItem,
 };
@@ -22,6 +24,7 @@ export const server = {
   exampleItems,
   admin: {
     listExampleItems: exampleItems.adminListItems,
+    createExampleItem: exampleItems.adminCreateItem,
     updateExampleItem: exampleItems.adminUpdateItem,
     deleteExampleItem: exampleItems.adminDeleteItem,
   },

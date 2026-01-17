@@ -1,17 +1,15 @@
 ---
 import {
-  AvButton,
   AvCard,
+  AvBreadcrumb,
   AvContainer,
   AvEmptyState,
-  AvInput,
-  AvTextarea,
 } from "@ansiversa/components";
 import { actions } from "astro:actions";
 import AppShell from "../../layouts/AppShell.astro";
 
 const title = "Example Items – Ansiversa";
-const description = "Create and manage your example items.";
+const description = "View your example items.";
 
 const listResult = await Astro.callAction(actions.exampleItems.fetchMyItems, {
   includeArchived: true,
@@ -21,109 +19,65 @@ const listResult = await Astro.callAction(actions.exampleItems.fetchMyItems, {
 const data = (listResult as any)?.data ?? (listResult as any) ?? {};
 const items = data?.items ?? [];
 
-const initialState = {
-  items,
-  form: { title: "", content: "" },
-  currentItem: null,
-  loading: false,
-  error: null,
-  success: null,
-};
+const total = items.length;
 ---
 
 <AppShell title={title} description={description}>
+  <section class="av-faq-public__crumb">
+    <AvContainer>
+      <AvBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Items" },
+        ]}
+      />
+    </AvContainer>
+  </section>
   <section class="av-section">
     <AvContainer>
-      <div
-        class="av-auth-stack-lg"
-        x-data="$store.exampleItems"
-        x-init="init && init(JSON.parse($el.dataset.initial))"
-        data-initial={JSON.stringify(initialState)}
-      >
+      <div class="av-auth-stack-lg">
         <AvCard className="av-auth-stack-md">
           <div class="av-auth-stack-sm">
             <div>
               <p class="av-kicker">Example Module</p>
               <h1 class="av-section-title">Your items</h1>
               <p class="av-text-soft">
-                This demo shows the standard CRUD pattern for mini-apps. Remove it when building a
-                real product.
+                This page is read-only in the starter. Manage items from the admin panel.
               </p>
             </div>
-
-            <form class="av-auth-stack-sm" @submit.prevent="createItem()">
-              <div class="av-auth-stack-xs">
-                <AvInput
-                  name="item-title"
-                  placeholder="Title"
-                  x-model="form.title"
-                  required
-                />
-                <AvTextarea
-                  name="item-content"
-                  rows={4}
-                  placeholder="Optional notes"
-                  x-model="form.content"
-                />
-              </div>
-              <div class="av-row-wrap">
-                <AvButton type="submit" :disabled="loading">Create item</AvButton>
-                <AvButton type="button" variant="ghost" @click.prevent="load(true)" :disabled="loading">
-                  Refresh list
-                </AvButton>
-              </div>
-            </form>
-
-            <template x-if="error">
-              <p class="av-error" role="alert" x-text="error"></p>
-            </template>
-            <template x-if="success">
-              <p class="av-success" role="status" x-text="success"></p>
-            </template>
           </div>
         </AvCard>
 
         <AvCard variant="soft" className="av-auth-stack-md">
           <div class="av-row-between">
             <h2 class="av-card-heading">Recent items</h2>
-            <p class="av-text-soft" x-text="`${items.length} total`"></p>
+            <p class="av-text-soft">{total} total</p>
           </div>
 
-          <template x-if="items.length === 0">
+          {total === 0 ? (
             <AvEmptyState
               title="No items yet"
-              description="Create your first item to see it here."
-              ctaLabel="Create item"
-              ctaHref="/items"
+              description="Items created in admin will appear here."
             />
-          </template>
-
-          <div class="av-auth-stack-sm" x-show="items.length > 0">
-            <template x-for="item in items" :key="item.id">
-              <div class="av-card av-card-soft av-auth-stack-xs">
-                <div class="av-row-between">
-                  <div>
-                    <h3 class="av-card-heading" x-text="item.title"></h3>
-                    <p class="av-text-soft" x-text="item.content || 'No notes'"></p>
+          ) : (
+            <div class="av-auth-stack-sm">
+              {items.map((item) => (
+                <div class="av-card av-card-soft av-auth-stack-xs">
+                  <div class="av-row-between">
+                    <div>
+                      <h3 class="av-card-heading">{item.title}</h3>
+                      <p class="av-text-soft">{item.content || "No notes"}</p>
+                    </div>
                   </div>
-                  <div class="av-row-wrap">
-                    <AvButton
-                      href="#"
-                      variant="ghost"
-                      size="sm"
-                      x-bind:href="`/items/${item.id}`"
-                    >
-                      Edit
-                    </AvButton>
-                  </div>
+                  <p class="av-text-soft">
+                    {item.updatedAt || item.createdAt
+                      ? `Updated ${new Date(item.updatedAt || item.createdAt).toLocaleString()}`
+                      : "Updated —"}
+                  </p>
                 </div>
-                <p
-                  class="av-text-soft"
-                  x-text="`Updated ${new Date(item.updatedAt || item.createdAt).toLocaleString()}`"
-                ></p>
-              </div>
-            </template>
-          </div>
+              ))}
+            </div>
+          )}
         </AvCard>
       </div>
     </AvContainer>
