@@ -17,14 +17,24 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const { cookies, locals, url } = context;
   const pathname = url.pathname;
 
-  const publicRoutes = new Set(["/"]);
+  const publicRoutes = new Set([
+    "/",
+    "/login",
+    "/register",
+    "/forgot-password",
+    "/reset",
+    "/reset-password",
+  ]);
 
   // Allow static assets
   if (
     pathname.startsWith("/_astro/") ||
     pathname.startsWith("/favicon") ||
     pathname.startsWith("/robots.txt") ||
-    pathname.startsWith("/images/")
+    pathname.startsWith("/images/") ||
+    pathname.startsWith("/assets/") ||
+    pathname.startsWith("/icons/") ||
+    pathname === "/manifest.webmanifest"
   ) {
     return next();
   }
@@ -91,8 +101,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   }
 
   if (pathname.startsWith("/admin")) {
-    const roleId = Number(locals.user?.roleId);
-    if (!Number.isFinite(roleId) || roleId !== 1) {
+    if (locals.user?.roleId !== 1) {
       return context.redirect("/");
     }
   }
