@@ -2,13 +2,13 @@
 
 interface ImportMetaEnv {
   /** Secret used for JWT / session signing */
-  readonly ANSIVERSA_AUTH_SECRET: string;
+  readonly ANSIVERSA_AUTH_SECRET?: string;
 
   /** Secret used for cookie encryption / session management */
   readonly ANSIVERSA_SESSION_SECRET: string;
 
   /** Domain for cookies (e.g., ansiversa.com) */
-  readonly ANSIVERSA_COOKIE_DOMAIN: string;
+  readonly ANSIVERSA_COOKIE_DOMAIN?: string;
 
   /** Optional: Override the default session cookie name */
   readonly SESSION_COOKIE_NAME?: string;

@@ -32,11 +32,10 @@ const dir = data?.dir ?? "desc";
 
 const sortKeyMap = [
   { prefix: "title", key: "title" },
-  { prefix: "user", key: "user" },
   { prefix: "status", key: "status" },
 ];
 const sortKey = sortKeyMap.find((entry) => sort.startsWith(entry.prefix))?.key ?? "updatedAt";
-const ascSorts = new Set(["title-asc", "user-asc", "status-asc", "oldest"]);
+const ascSorts = new Set(["title-asc", "status-asc", "oldest"]);
 const sortDir = ascSorts.has(sort) ? "asc" : "desc";
 
 const initialState = {
@@ -83,7 +82,7 @@ const initialState = {
         <div slot="search">
           <div class="av-admin-toolbar-left">
             <div class="av-admin-toolbar-top">
-              <p class="av-table-toolbar__subtitle av-m-0">All user items.</p>
+              <p class="av-table-toolbar__subtitle av-m-0">Items you created.</p>
               <div class="av-admin-toolbar-actions">
                 <AvButton
                   size="md"
@@ -150,7 +149,7 @@ const initialState = {
               stickyHeader
               sortKey={sortKey}
               sortDir={sortDir}
-              x-bind:data-sort-key="sort.startsWith('title') ? 'title' : sort.startsWith('user') ? 'user' : sort.startsWith('status') ? 'status' : 'updatedAt'"
+              x-bind:data-sort-key="sort.startsWith('title') ? 'title' : sort.startsWith('status') ? 'status' : 'updatedAt'"
               x-bind:data-sort-dir="dir"
             >
             <thead>
@@ -158,9 +157,7 @@ const initialState = {
                 <th>
                   <button class="av-table__sort" data-av-sort="title">Title</button>
                 </th>
-                <th>
-                  <button class="av-table__sort" data-av-sort="user">User</button>
-                </th>
+                <th>User</th>
                 <th>
                   <button class="av-table__sort" data-av-sort="updatedAt" data-av-sort-default="desc">
                     Updated

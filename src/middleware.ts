@@ -3,7 +3,10 @@ import { SESSION_COOKIE_NAME, verifySessionToken } from "./lib/auth";
 
 // Primary domain for Ansiversa (used to build the root app URL)
 const COOKIE_DOMAIN =
-  import.meta.env.ANSIVERSA_COOKIE_DOMAIN ?? "ansiversa.com";
+  import.meta.env.ANSIVERSA_COOKIE_DOMAIN ?? (import.meta.env.DEV ? "localhost" : undefined);
+if (!COOKIE_DOMAIN && !import.meta.env.DEV) {
+  throw new Error("ANSIVERSA_COOKIE_DOMAIN is required in production.");
+}
 
 // Root app URL
 const ROOT_APP_URL =

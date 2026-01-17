@@ -27,8 +27,6 @@ const adminListSchema = z.object({
       "oldest",
       "title-asc",
       "title-desc",
-      "user-asc",
-      "user-desc",
       "status-asc",
       "status-desc",
     ])
@@ -183,10 +181,6 @@ export const adminListItems = defineAction({
       orderBy = [asc(ExampleItem.title), desc(ExampleItem.updatedAt)];
     } else if (resolvedSort === "title-desc") {
       orderBy = [desc(ExampleItem.title), desc(ExampleItem.updatedAt)];
-    } else if (resolvedSort === "user-asc") {
-      orderBy = [asc(ExampleItem.userId), desc(ExampleItem.updatedAt)];
-    } else if (resolvedSort === "user-desc") {
-      orderBy = [desc(ExampleItem.userId), desc(ExampleItem.updatedAt)];
     } else if (resolvedSort === "status-asc") {
       orderBy = [asc(ExampleItem.isArchived), desc(ExampleItem.updatedAt)];
     } else if (resolvedSort === "status-desc") {

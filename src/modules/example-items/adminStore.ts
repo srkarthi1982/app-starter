@@ -10,8 +10,6 @@ export type AdminExampleItemsSort =
   | "oldest"
   | "title-asc"
   | "title-desc"
-  | "user-asc"
-  | "user-desc"
   | "status-asc"
   | "status-desc";
 export type AdminExampleItemsDir = "asc" | "desc";
@@ -140,9 +138,6 @@ export class AdminExampleItemsStore extends AvBaseStore implements ReturnType<ty
       if (key === "title") {
         this.sort = nextDir === "asc" ? "title-asc" : "title-desc";
         this.dir = nextDir;
-      } else if (key === "user") {
-        this.sort = nextDir === "asc" ? "user-asc" : "user-desc";
-        this.dir = nextDir;
       } else if (key === "status") {
         this.sort = nextDir === "asc" ? "status-asc" : "status-desc";
         this.dir = nextDir;
@@ -163,12 +158,6 @@ export class AdminExampleItemsStore extends AvBaseStore implements ReturnType<ty
         this.dir = "asc";
       } else if (v === "title-desc") {
         this.sort = "title-desc";
-        this.dir = "desc";
-      } else if (v === "user-asc") {
-        this.sort = "user-asc";
-        this.dir = "asc";
-      } else if (v === "user-desc") {
-        this.sort = "user-desc";
         this.dir = "desc";
       } else if (v === "status-asc") {
         this.sort = "status-asc";
