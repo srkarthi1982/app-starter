@@ -84,11 +84,15 @@ If this works, your setup is correct.
 ## Commands
 
 - `npm run dev`
-- `npm run dev:remote`
 - `npm run typecheck` (Astro check)
 - `npm run build`
-- `npm run build:remote`
-- `npm run db:push:local`
+- `npm run db:push`
+
+## Database workflow (standard)
+
+This starter intentionally uses file-based remote DB locally for consistency.
+`npm run dev` and `npm run build` run in `--remote` mode against `.astro/content.db`.
+Use `npm run db:push` as the single schema push command.
 
 ## Example module
 

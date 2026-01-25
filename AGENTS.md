@@ -42,6 +42,8 @@ Defined in `db/tables.ts`:
 
 ## 4. Task Log (Newest first)
 
+- 2026-01-25 Updated README to match standardized file-based remote DB workflow and db:push command.
+- 2026-01-25 Added missing .env for local dev defaults (auth secrets + dev bypass values).
 - 2026-01-25 Standardized Astro DB scripts: we intentionally run file-based remote mode locally; use `npm run db:push` for schema push.
 - 2026-01-17 Expanded README with mental model, first-run checklist, and standards framing.
 - 2026-01-17 Added DEV_BYPASS_AUTH env defaults to enable local dummy session.
