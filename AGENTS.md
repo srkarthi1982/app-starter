@@ -42,6 +42,7 @@ Defined in `db/tables.ts`:
 
 ## 4. Task Log (Newest first)
 
+- 2026-01-25 Standardized Astro DB scripts: we intentionally run file-based remote mode locally; use `npm run db:push` for schema push.
 - 2026-01-17 Expanded README with mental model, first-run checklist, and standards framing.
 - 2026-01-17 Added DEV_BYPASS_AUTH env defaults to enable local dummy session.
 - 2026-01-17 Expanded public routes/static allowlist and simplified admin role check in middleware.
