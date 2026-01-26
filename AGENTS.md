@@ -72,3 +72,4 @@ Defined in `db/tables.ts`:
 - 2026-01-26 Fixed Astro DB scripts overriding remote envs by removing hardcoded ASTRO_DB_REMOTE_URL; added .env.example guidance and ignored .env.local/.env.*.local so Vercel uses env vars.
 - 2026-01-26 Bumped @ansiversa/components to ^0.0.117 to align with latest resume schema (declaration field).
 - 2026-01-26 Added APP_KEY config and wired miniAppKey into AppShell to show AvMiniAppBar; bumped @ansiversa/components to ^0.0.118.
+- 2026-01-26 Added local ASTRO_DB_REMOTE_URL (file:.astro/content.db) in .env to fix ActionsCantBeLoaded for local dev; no repo config changes.
