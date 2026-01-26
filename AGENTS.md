@@ -70,3 +70,4 @@ Defined in `db/tables.ts`:
 - 2026-01-16 App-starter rebuilt from quiz golden base; example CRUD module added; README/AGENTS updated.
 - 2026-01-16 AppShell now calls local notification proxy; env docs updated with PARENT_APP_URL and auth secret note.
 - 2026-01-26 Fixed Astro DB scripts overriding remote envs by removing hardcoded ASTRO_DB_REMOTE_URL; added .env.example guidance and ignored .env.local/.env.*.local so Vercel uses env vars.
+- 2026-01-26 Bumped @ansiversa/components to ^0.0.117 to align with latest resume schema (declaration field).
