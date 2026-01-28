@@ -42,6 +42,8 @@ Defined in `db/tables.ts`:
 
 ## 4. Task Log (Newest first)
 
+- 2026-01-28 Added app-starter mini-app links (Home, Items) and bumped @ansiversa/components to ^0.0.119.
+- 2026-01-28 Added local/remote dev+build scripts for dual DB mode support.
 - 2026-01-25 Updated README to match standardized file-based remote DB workflow and db:push command.
 - 2026-01-25 Added missing .env for local dev defaults (auth secrets + dev bypass values).
 - 2026-01-25 Standardized Astro DB scripts: we intentionally run file-based remote mode locally; use `npm run db:push` for schema push.
