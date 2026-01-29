@@ -42,6 +42,8 @@ Defined in `db/tables.ts`:
 
 ## 4. Task Log (Newest first)
 
+- 2026-01-29 Added parent notification helper and demo item-created notification in example flow.
+
 - 2026-01-28 Added app-starter mini-app links (Home, Items) and bumped @ansiversa/components to ^0.0.119.
 - 2026-01-28 Added local/remote dev+build scripts for dual DB mode support.
 - 2026-01-25 Updated README to match standardized file-based remote DB workflow and db:push command.
@@ -75,3 +77,9 @@ Defined in `db/tables.ts`:
 - 2026-01-26 Bumped @ansiversa/components to ^0.0.117 to align with latest resume schema (declaration field).
 - 2026-01-26 Added APP_KEY config and wired miniAppKey into AppShell to show AvMiniAppBar; bumped @ansiversa/components to ^0.0.118.
 - 2026-01-26 Added local ASTRO_DB_REMOTE_URL (file:.astro/content.db) in .env to fix ActionsCantBeLoaded for local dev; no repo config changes.
+
+## Verification Log
+
+- 2026-01-29 `npm run typecheck` (pass; 1 hint in baseRepository).
+- 2026-01-29 `npm run build` (pass).
+- 2026-01-29 Smoke test: not run (manual create item).

@@ -5,6 +5,7 @@ import { ExampleItem, and, asc, desc, eq, sql } from "astro:db";
 import { exampleItemRepository } from "./repositories";
 import { requireAdmin, requireUser } from "./_guards";
 import { normalizeExampleItem, normalizeText } from "../modules/example-items/helpers";
+import { notifyParent } from "../lib/notifyParent";
 
 const itemPayloadSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -94,6 +95,15 @@ export const createItem = defineAction({
         isArchived: payload.isArchived,
         createdAt: now,
         updatedAt: now,
+      });
+
+      void notifyParent({
+        appKey: "app-starter",
+        userId: user.id,
+        title: "Example item created",
+        message: `“${payload.title}” was added.`,
+        level: "info",
+        meta: { itemId: inserted?.[0]?.id ?? null },
       });
 
       return { item: normalizeExampleItem(inserted[0]) };
