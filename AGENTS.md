@@ -42,6 +42,8 @@ Defined in `db/tables.ts`:
 
 ## 4. Task Log (Newest first)
 
+- 2026-01-31 Normalized payment fields in `Astro.locals.user` to avoid undefined values (stripeCustomerId/plan/planStatus/isPaid/renewalAt).
+- 2026-01-31 Added locals.session payment flags in middleware/types and a temporary `/admin/session` debug page for Phase 2 verification.
 - 2026-01-29 Added parent notification helper and demo item-created notification in example flow.
 
 - 2026-01-28 Added app-starter mini-app links (Home, Items) and bumped @ansiversa/components to ^0.0.119.
@@ -80,6 +82,8 @@ Defined in `db/tables.ts`:
 
 ## Verification Log
 
+- 2026-01-31 Pending manual check: paid user sees non-null fields; free user sees null/false in `Astro.locals.user`.
+- 2026-01-31 Pending manual check: `/admin/session` shows isPaid true for paid user and false for free user.
 - 2026-01-29 `npm run typecheck` (pass; 1 hint in baseRepository).
 - 2026-01-29 `npm run build` (pass).
 - 2026-01-29 Smoke test: not run (manual create item).
