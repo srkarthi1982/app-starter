@@ -42,6 +42,8 @@ Defined in `db/tables.ts`:
 
 ## 4. Task Log (Newest first)
 
+- 2026-02-01 Implemented AppStarter core integrations (requirePro, paywall pattern, dashboard + notification webhooks, safe auth redirects, summary schema).
+- 2026-02-01 Added APPSTARTER-INTEGRATIONS.md checklist in repo root.
 - 2026-01-31 Normalized payment fields in `Astro.locals.user` to avoid undefined values (stripeCustomerId/plan/planStatus/isPaid/renewalAt).
 - 2026-01-31 Added locals.session payment flags in middleware/types and a temporary `/admin/session` debug page for Phase 2 verification.
 - 2026-01-29 Added parent notification helper and demo item-created notification in example flow.
@@ -82,8 +84,25 @@ Defined in `db/tables.ts`:
 
 ## Verification Log
 
+- 2026-02-01 `npm run typecheck` (pass; 6 hints in redirect pages/baseRepository).
+- 2026-02-01 `npm run build` (pass).
 - 2026-01-31 Pending manual check: paid user sees non-null fields; free user sees null/false in `Astro.locals.user`.
 - 2026-01-31 Pending manual check: `/admin/session` shows isPaid true for paid user and false for free user.
 - 2026-01-29 `npm run typecheck` (pass; 1 hint in baseRepository).
 - 2026-01-29 `npm run build` (pass).
 - 2026-01-29 Smoke test: not run (manual create item).
+
+---
+
+## Verification Checklist (Template)
+
+- [ ] Auth locals normalized
+- [ ] Billing flags present
+- [ ] `requirePro` guard works
+- [ ] Paywall UI pattern present
+- [ ] Dashboard webhook push works
+- [ ] Notifications helper wired
+- [ ] Admin guard works
+- [ ] Layout + `global.css` correct
+- [ ] Webhook timeouts + retries documented
+- [ ] Build/typecheck green

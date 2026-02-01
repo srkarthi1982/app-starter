@@ -23,6 +23,9 @@ npm ci
 - `ANSIVERSA_COOKIE_DOMAIN`
 - `PUBLIC_ROOT_APP_URL` (optional)
 - `PARENT_APP_URL` (optional)
+- `ANSIVERSA_WEBHOOK_SECRET` (optional)
+- `PARENT_NOTIFICATION_WEBHOOK_URL` (optional)
+- `PARENT_ACTIVITY_WEBHOOK_URL` (optional)
 
 Note: `ANSIVERSA_AUTH_SECRET` is reserved for future auth workflows (not used in this starter yet).
 
@@ -87,6 +90,11 @@ If this works, your setup is correct.
 - `npm run typecheck` (Astro check)
 - `npm run build`
 - `npm run db:push`
+
+## Integration checklist (frozen standard)
+
+See `APPSTARTER-INTEGRATIONS.md` in the repo root. This is the required platform
+integration checklist for every mini-app.
 
 ## Database workflow (standard)
 
