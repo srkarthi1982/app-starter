@@ -42,6 +42,7 @@ Defined in `db/tables.ts`:
 
 ## 4. Task Log (Newest first)
 
+- 2026-02-01 Added `/help` page and wired Help link into the mini-app menu.
 - 2026-02-01 Implemented AppStarter core integrations (requirePro, paywall pattern, dashboard + notification webhooks, safe auth redirects, summary schema).
 - 2026-02-01 Added APPSTARTER-INTEGRATIONS.md checklist in repo root.
 - 2026-01-31 Normalized payment fields in `Astro.locals.user` to avoid undefined values (stripeCustomerId/plan/planStatus/isPaid/renewalAt).
