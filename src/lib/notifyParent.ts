@@ -1,3 +1,5 @@
+import { postWebhook } from "./webhook";
+
 type ParentNotificationPayload = {
   appKey: "app-starter";
   userId: string;
@@ -21,15 +23,6 @@ export const notifyParent = async (payload: ParentNotificationPayload): Promise<
     const secret = import.meta.env.ANSIVERSA_WEBHOOK_SECRET;
 
     const url = resolveNotificationUrl(baseUrl, overrideUrl);
-    if (!url || !secret) {
-      if (import.meta.env.DEV) {
-        console.warn(
-          "notifyParent skipped: missing PARENT_APP_URL/PARENT_NOTIFICATION_WEBHOOK_URL or ANSIVERSA_WEBHOOK_SECRET",
-        );
-      }
-      return;
-    }
-
     const body = {
       appKey: payload.appKey,
       userId: payload.userId,
@@ -39,15 +32,12 @@ export const notifyParent = async (payload: ParentNotificationPayload): Promise<
       meta: payload.meta ?? null,
       createdAt: payload.createdAt ?? new Date().toISOString(),
     };
-
-    void fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Ansiversa-Signature": secret,
-      },
-      body: JSON.stringify(body),
-    }).catch(() => {});
+    await postWebhook({
+      url,
+      secret,
+      payload: body,
+      appKey: payload.appKey,
+    });
   } catch (error) {
     if (import.meta.env.DEV) {
       console.warn("notifyParent failed", error);

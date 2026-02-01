@@ -2,6 +2,7 @@
 import {
   AvCard,
   AvBreadcrumb,
+  AvButton,
   AvContainer,
   AvEmptyState,
 } from "@ansiversa/components";
@@ -21,6 +22,7 @@ const data = (listResult as any)?.data ?? (listResult as any) ?? {};
 const items = (data?.items ?? []) as ExampleItemDTO[];
 
 const total = items.length;
+const isPaid = Boolean(Astro.locals.user?.isPaid);
 ---
 
 <AppShell title={title} description={description}>
@@ -46,6 +48,32 @@ const total = items.length;
                 This page is read-only in the starter. Manage items from the admin panel.
               </p>
             </div>
+          </div>
+        </AvCard>
+
+        <AvCard variant="soft" className="av-auth-stack-md">
+          <div class="av-auth-stack-sm">
+            <div class="av-row-between">
+              <div>
+                <h2 class="av-card-heading">Pro export (example)</h2>
+                <p class="av-text-soft">
+                  Showcase the standard Pro paywall pattern with a disabled action and CTA.
+                </p>
+              </div>
+              <span class="av-badge av-badge-primary">Pro</span>
+            </div>
+            <div class="av-row-wrap">
+              <AvButton type="button" disabled={!isPaid}>Export items</AvButton>
+              <AvButton type="button" variant="ghost" disabled={!isPaid}>
+                Schedule export
+              </AvButton>
+            </div>
+            {!isPaid ? (
+              <div class="av-card av-card-soft av-auth-stack-xs">
+                <p class="av-text-strong">Pro exports are available in Pro.</p>
+                <AvButton href="/pricing" variant="ghost">View pricing</AvButton>
+              </div>
+            ) : null}
           </div>
         </AvCard>
 

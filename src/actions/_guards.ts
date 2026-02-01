@@ -21,3 +21,11 @@ export const requireAdmin = (context: ActionAPIContext): AuthUser => {
   }
   return user;
 };
+
+export const requirePro = (context: ActionAPIContext): AuthUser => {
+  const user = requireUser(context);
+  if (!user?.isPaid) {
+    throw new ActionError({ code: "PAYMENT_REQUIRED", message: "Pro access required" });
+  }
+  return user;
+};

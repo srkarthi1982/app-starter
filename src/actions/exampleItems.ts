@@ -3,9 +3,11 @@ import { ActionError, defineAction, type ActionAPIContext } from "astro:actions"
 import { z } from "astro:schema";
 import { ExampleItem, and, asc, desc, eq, sql } from "astro:db";
 import { exampleItemRepository } from "./repositories";
-import { requireAdmin, requireUser } from "./_guards";
+import { requireAdmin, requirePro, requireUser } from "./_guards";
 import { normalizeExampleItem, normalizeText } from "../modules/example-items/helpers";
 import { notifyParent } from "../lib/notifyParent";
+import { pushAppStarterActivity } from "../lib/pushActivity";
+import { buildAppStarterSummary } from "../dashboard/summary.schema";
 
 const itemPayloadSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -106,6 +108,19 @@ export const createItem = defineAction({
         meta: { itemId: inserted?.[0]?.id ?? null },
       });
 
+      void (async () => {
+        const summary = await buildAppStarterSummary(user.id);
+        await pushAppStarterActivity({
+          userId: user.id,
+          activity: {
+            event: "items.created",
+            occurredAt: new Date().toISOString(),
+            entityId: inserted?.[0]?.id ?? undefined,
+          },
+          summary,
+        });
+      })();
+
       return { item: normalizeExampleItem(inserted[0]) };
     } catch (err: unknown) {
       throw new ActionError({
@@ -141,6 +156,19 @@ export const updateMyItem = defineAction({
         (table) => eq(table.id, id),
       );
 
+      void (async () => {
+        const summary = await buildAppStarterSummary(user.id);
+        await pushAppStarterActivity({
+          userId: user.id,
+          activity: {
+            event: "items.updated",
+            occurredAt: new Date().toISOString(),
+            entityId: id,
+          },
+          summary,
+        });
+      })();
+
       return { item: normalizeExampleItem(updated[0]) };
     } catch (err: unknown) {
       throw new ActionError({
@@ -163,6 +191,20 @@ export const deleteMyItem = defineAction({
 
     try {
       await exampleItemRepository.delete((table) => eq(table.id, id));
+
+      void (async () => {
+        const summary = await buildAppStarterSummary(user.id);
+        await pushAppStarterActivity({
+          userId: user.id,
+          activity: {
+            event: "items.deleted",
+            occurredAt: new Date().toISOString(),
+            entityId: id,
+          },
+          summary,
+        });
+      })();
+
       return { success: true };
     } catch (err: unknown) {
       throw new ActionError({
@@ -170,6 +212,17 @@ export const deleteMyItem = defineAction({
         message: (err as Error)?.message ?? "Unable to delete item",
       });
     }
+  },
+});
+
+export const exportItems = defineAction({
+  accept: "json",
+  handler: async (_input, context: ActionAPIContext) => {
+    const user = requirePro(context);
+    return {
+      ok: true,
+      message: `Export queued for ${user.email ?? user.id}.`,
+    };
   },
 });
 

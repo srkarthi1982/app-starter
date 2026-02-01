@@ -25,6 +25,9 @@ interface ImportMetaEnv {
   /** Optional: Parent notification webhook URL override */
   readonly PARENT_NOTIFICATION_WEBHOOK_URL?: string;
 
+  /** Optional: Parent activity webhook URL override */
+  readonly PARENT_ACTIVITY_WEBHOOK_URL?: string;
+
   /** Optional: Dev-only auth bypass (requires import.meta.env.DEV) */
   readonly DEV_BYPASS_AUTH?: string;
 

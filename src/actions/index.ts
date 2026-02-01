@@ -5,6 +5,7 @@ import {
   adminUpdateItem,
   createItem,
   deleteMyItem,
+  exportItems,
   fetchMyItems,
   updateMyItem,
 } from "./exampleItems";
@@ -14,6 +15,7 @@ export const exampleItems = {
   createItem,
   updateMyItem,
   deleteMyItem,
+  exportItems,
   adminListItems,
   adminCreateItem,
   adminUpdateItem,
