@@ -6,6 +6,17 @@ Use this as the default verification list before launch. Keep it concise, consis
 
 ---
 
+## 0) New Repo Bootstrap from App Starter (mandatory)
+
+This prevents repeated setup mistakes. Do this before any feature work.
+
+- [ ] Clone `app-starter` into the new repo folder
+- [ ] Remove old git origin, add new origin for the new repo
+- [ ] Reset `package.json` name, app key/slug, and `.env.example` values
+- [ ] Delete the Example Module (see section C)
+- [ ] First commit in the new repo
+- [ ] Run `npm run typecheck` + `npm run build` and log in `AGENTS.md`
+
 ## A) Core integrations — Must-have (V1)
 
 These **must** ship with AppStarter so every mini-app is platform-ready.
@@ -23,16 +34,30 @@ These **must** ship with AppStarter so every mini-app is platform-ready.
   - [ ] Pro badge
   - [ ] Disabled state
   - [ ] Paywall panel + `/pricing` CTA
+- [ ] Define `FREE_LIMITS` in a single file and enforce in server actions
+- [ ] All pro-only actions must use `requirePro()`
+- [ ] UI gating is never enough; all gating must be enforced in server actions
 
 ### 3) Dashboard Integration (Parent)
 - [ ] Webhook helper to push activity + summary JSON
 - [ ] Summary JSON versioning + sample schema
 - [ ] “Push on key events” pattern
+- [ ] Contract (required)
+  - [ ] Env: `ANSIVERSA_PARENT_BASE_URL`
+  - [ ] Env: `ANSIVERSA_DASHBOARD_WEBHOOK_URL`
+  - [ ] Env: `ANSIVERSA_DASHBOARD_WEBHOOK_SECRET`
+  - [ ] Payload: `appId`, `userId`, `eventType`, `summaryVersion`, `summary`
 
 ### 4) Notifications Integration (Parent-owned)
 - [ ] Helper to emit notification events to parent
 - [ ] Payload contract + example
 - [ ] Parent owns UI rendering
+- [ ] AppShell shows unread count via parent notification count endpoint (SSR)
+- [ ] If count endpoint is unavailable, fallback to `0` silently
+- [ ] Contract (required)
+  - [ ] Env: `ANSIVERSA_NOTIFICATIONS_WEBHOOK_URL` (optional)
+  - [ ] Env: `ANSIVERSA_NOTIFICATIONS_WEBHOOK_SECRET` (optional)
+  - [ ] Payload: `appId`, `userId`, `eventType`, `title`, `url`
 
 ### 5) Admin Guard (Role-based)
 - [ ] `/admin` route guard using `roleId`
@@ -46,6 +71,7 @@ These **must** ship with AppStarter so every mini-app is platform-ready.
 ### 7) Webhook hygiene (dashboard/notifications calls)
 - [ ] Short timeout enforced
 - [ ] Best-effort (non-blocking)
+- [ ] Never fail the user action if webhook fails; log and continue
 - [ ] Retry guidance (2–3 max with backoff)
 - [ ] Log failures with `appId`
 
@@ -60,36 +86,37 @@ These **must** ship with AppStarter so every mini-app is platform-ready.
 These are recommended **drop-in modules** or guidance. Do not wire by default in V1.
 
 ### 9) Rate limiting / abuse protection
-- [ ] Guidance for heavy endpoints (AI, search, exports)
-- [ ] Basic throttling pattern (per user / per minute)
+- [ ] Throttling guidance for heavy endpoints (per user / per minute)
 
 ### 10) Error monitoring / centralized logging
-- [ ] Optional Sentry (or internal) hook
-- [ ] Consistent tags: `{ appId, userId?, action }`
+- [ ] Optional monitoring hook with tags `{ appId, userId?, action }`
 
 ### 11) Analytics / telemetry
-- [ ] Event hook pattern: screen view + primary actions
-- [ ] Privacy-first defaults
+- [ ] Event hook pattern (screen view + primary actions), privacy-first
 
 ### 12) Privacy & compliance notes
-- [ ] PII redaction rules for logs/webhooks
-- [ ] No secrets in payloads
+- [ ] PII redaction rules; never include secrets in payloads
 
 ### 13) CORS / API access rules
-- [ ] Default deny
-- [ ] Allow only `ansiversa.com` / `*.ansiversa.com` if needed
+- [ ] Default deny; allow only `ansiversa.com` / `*.ansiversa.com` if needed
 
 ### 14) Feature flags / rollout controls
-- [ ] Enable/disable features by app or role
-- [ ] Beta rollout guidance
+- [ ] Enable/disable by app or role; beta rollout guidance
 
 ### 15) File/asset storage integration
-- [ ] Standard storage approach + URL policy
-- [ ] Optional upload helper
+- [ ] Standard storage approach + URL policy + optional upload helper
 
 ### 16) Email / export integrations
-- [ ] Standard export job or email hook
-- [ ] Payload shape guidelines
+- [ ] Standard export job or email hook; payload shape guidance
+
+---
+
+## C) Cleanup before real app
+
+- [ ] Delete Example Module:
+  - [ ] `src/modules/example-items/`
+  - [ ] Routes: `/items`, `/items/[id]`, `/admin/items`
+- [ ] Remove temporary debug pages before release (or guard behind DEV flag)
 
 ---
 

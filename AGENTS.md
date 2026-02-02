@@ -42,6 +42,8 @@ Defined in `db/tables.ts`:
 
 ## 4. Task Log (Newest first)
 
+- 2026-02-02 Corrected notifications payload contract and tightened billing/webhook/unread-count rules in APPSTARTER-INTEGRATIONS.md.
+- 2026-02-02 Updated APPSTARTER-INTEGRATIONS.md with bootstrap rules, contracts, cleanup, and checklist clarifications.
 - 2026-02-01 Added `/help` page and wired Help link into the mini-app menu.
 - 2026-02-01 Implemented AppStarter core integrations (requirePro, paywall pattern, dashboard + notification webhooks, safe auth redirects, summary schema).
 - 2026-02-01 Added APPSTARTER-INTEGRATIONS.md checklist in repo root.
