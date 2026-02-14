@@ -117,6 +117,7 @@ Defined in `db/tables.ts`:
 
 ## Task Log (Recent)
 - Keep newest first; include date and short summary.
+- 2026-02-14 Added canonical AI standard doc `docs/AI-INTEGRATION-STANDARD.md` for community developers (parent-gateway-only architecture, featureKey allowlist policy, AvAiAssist UI standard, mini-app proxy + canonical `https://www.ansiversa.com` production rule, V1 freeze scope, verification checklist), and added developer-facing discovery links on landing (`src/pages/index.astro`) plus docs routes (`src/pages/docs/index.astro`, `src/pages/docs/ai-integration.astro`) without changing mini-app user nav menus. Verification: `npm run typecheck` (pass; 0 errors, existing 6 hints), `npm run build` (pass). Manual check target: landing “Developer Docs” links open `/docs` and `/docs/ai-integration`.
 - 2026-02-14 Upgraded `@ansiversa/components` to `^0.0.128` (lockfile resolved to `0.0.128`) and verified with `npm run typecheck` (pass; 0 errors, existing 6 hints).
 - 2026-02-09 Enforced repo-level AGENTS mandatory task-log update rule for Codex/AI execution.
 - 2026-02-09 Verified repo AGENTS contract linkage to workspace source-of-truth.
