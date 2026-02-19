@@ -4,6 +4,7 @@ import AppAdminShell from "../../layouts/AppAdminShell.astro";
 
 const adminItems = [
   { label: "Items", href: "/admin/items", description: "Review and manage items" },
+  { label: "FAQ", href: "/admin/faq", description: "Manage app starter FAQs" },
 ];
 
 const query = Astro.url.searchParams.get("q")?.trim() ?? "";
