@@ -7,11 +7,15 @@ import {
   deleteMyItem,
   exportItems,
   fetchMyItems,
+  listItemBookmarks,
+  toggleBookmark,
   updateMyItem,
 } from "./exampleItems";
 
 export const exampleItems = {
   fetchMyItems,
+  listItemBookmarks,
+  toggleBookmark,
   createItem,
   updateMyItem,
   deleteMyItem,

@@ -8,6 +8,7 @@ import { normalizeExampleItem, normalizeText } from "../modules/example-items/he
 import { notifyParent } from "../lib/notifyParent";
 import { pushAppStarterActivity } from "../lib/pushActivity";
 import { buildAppStarterSummary } from "../dashboard/summary.schema";
+import { listItemBookmarks, toggleBookmark } from "./bookmarks";
 
 const itemPayloadSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -80,6 +81,8 @@ export const fetchMyItems = defineAction({
     };
   },
 });
+
+export { listItemBookmarks, toggleBookmark };
 
 export const createItem = defineAction({
   input: itemPayloadSchema,

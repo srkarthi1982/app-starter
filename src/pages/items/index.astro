@@ -1,5 +1,6 @@
 ---
 import {
+  AvBookmarkButton,
   AvCard,
   AvBreadcrumb,
   AvButton,
@@ -36,7 +37,7 @@ const isPaid = Boolean(Astro.locals.user?.isPaid);
       />
     </AvContainer>
   </section>
-  <section class="av-section">
+  <section class="av-section" x-data="$store.exampleItems" x-init="initBookmarks()">
     <AvContainer>
       <div class="av-auth-stack-lg">
         <AvCard className="av-auth-stack-md">
@@ -97,6 +98,14 @@ const isPaid = Boolean(Astro.locals.user?.isPaid);
                       <h3 class="av-card-heading">{item.title}</h3>
                       <p class="av-text-soft">{item.content || "No notes"}</p>
                     </div>
+                    <AvBookmarkButton
+                      active={false}
+                      activeExpr={`isBookmarked(${JSON.stringify(item.id)})`}
+                      title="Save bookmark"
+                      activeTitle="Remove bookmark"
+                      onClick={`toggleBookmarkItem({ id: ${JSON.stringify(item.id)}, title: ${JSON.stringify(item.title)} })`}
+                      size="sm"
+                    />
                   </div>
                   <p class="av-text-soft">
                     {item.updatedAt || item.createdAt

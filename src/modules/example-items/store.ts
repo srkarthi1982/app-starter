@@ -10,6 +10,7 @@ const defaultForm = (): ExampleItemForm => ({
 
 const defaultState = () => ({
   items: [] as ExampleItemDTO[],
+  bookmarks: new Set<string>(),
   form: defaultForm(),
   currentItem: null as ExampleItemDTO | null,
   loading: false,
@@ -19,6 +20,7 @@ const defaultState = () => ({
 
 export class ExampleItemsStore extends AvBaseStore implements ReturnType<typeof defaultState> {
   items: ExampleItemDTO[] = [];
+  bookmarks: Set<string> = new Set();
   form: ExampleItemForm = defaultForm();
   currentItem: ExampleItemDTO | null = null;
   loading = false;
@@ -29,6 +31,9 @@ export class ExampleItemsStore extends AvBaseStore implements ReturnType<typeof 
     if (!initial) return;
     Object.assign(this, defaultState(), initial);
     this.items = (initial.items ?? []) as ExampleItemDTO[];
+    this.bookmarks = initial.bookmarks instanceof Set
+      ? new Set(Array.from(initial.bookmarks).map((id) => String(id)))
+      : new Set();
     this.currentItem = (initial.currentItem ?? null) as ExampleItemDTO | null;
     this.form = { ...defaultForm(), ...(initial.form ?? {}) };
   }
@@ -56,6 +61,52 @@ export class ExampleItemsStore extends AvBaseStore implements ReturnType<typeof 
       this.error = err?.message || "Failed to load items.";
     } finally {
       this.loading = false;
+    }
+  }
+
+  isBookmarked(itemId: string | number) {
+    return this.bookmarks.has(String(itemId));
+  }
+
+  private setBookmarkState(itemId: string | number, saved: boolean) {
+    const key = String(itemId);
+    const next = new Set(this.bookmarks);
+    if (saved) {
+      next.add(key);
+    } else {
+      next.delete(key);
+    }
+    this.bookmarks = next;
+  }
+
+  async initBookmarks() {
+    try {
+      const res = await actions.exampleItems.listItemBookmarks({});
+      const data = this.unwrapResult<{ items?: Array<{ itemId: string | number }> }>(res);
+      this.bookmarks = new Set((data.items ?? []).map((item) => String(item.itemId)));
+    } catch {
+      this.bookmarks = new Set();
+    }
+  }
+
+  async toggleBookmarkItem(item: { id: string | number; title?: string | null }) {
+    const itemId = String(item.id ?? "").trim();
+    if (!itemId) return;
+
+    const wasSaved = this.isBookmarked(itemId);
+    this.setBookmarkState(itemId, !wasSaved);
+
+    try {
+      const res = await actions.exampleItems.toggleBookmark({
+        entityType: "item",
+        entityId: itemId,
+        label: item.title?.trim() || "Untitled item",
+      });
+      const data = this.unwrapResult<{ saved?: boolean }>(res);
+      this.setBookmarkState(itemId, Boolean(data?.saved));
+    } catch (err: any) {
+      this.setBookmarkState(itemId, wasSaved);
+      this.error = err?.message || "Unable to update bookmark.";
     }
   }
 
