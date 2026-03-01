@@ -116,6 +116,7 @@ Defined in `db/tables.ts`:
 - [ ] Build/typecheck green
 
 ## Task Log (Recent)
+- 2026-03-01 Live-app shared UI sync: upgraded `@ansiversa/components` to `^0.0.163` (or confirmed already aligned in `web`) and refreshed install state for this repo. Verification: `npm run build` ✅.
 - Keep newest first; include date and short summary.
 - 2026-02-27 Middleware Standard V1 seed rollout: standardized middleware to config-driven template using `src/lib/middlewareConfig.ts` + shared `src/middleware.ts` (static asset bypass invariants, production `ANSIVERSA_COOKIE_DOMAIN` enforcement, normalized auth flow order, safe numeric admin-role gate, DEV-only bypass semantics). App-starter now serves as canonical seed with behavior preserved (`protectMost`, current public auth routes, `/api/faqs.json` bypass). Updated `.env.example` with required routing vars and standardized `DEV_BYPASS_*` contract. Verification: `npm run typecheck` ✅, `npm run build` ✅.
 - 2026-02-27 Footer parent-origin rollout: bumped `@ansiversa/components` to `0.0.149` (lockfile refreshed) to consume shared footer absolute-parent links for Terms/Privacy/FAQ/Contact (`https://ansiversa.com/...` in prod, configurable locally via `PUBLIC_ANSIVERSA_PARENT_ORIGIN`). Verification: `npm run build` ✅.
