@@ -134,3 +134,15 @@ Use this block in every mini-app repo after you finish a task.
 - [ ] Layout + `global.css` correct
 - [ ] Webhook timeouts + retries documented
 - [ ] Build/typecheck green
+
+## Drawer UX Verification Snippet (copy/paste)
+
+Use this snippet when a mini-app adopts Drawer UX Standard V1 from app-starter.
+
+- [ ] Create drawer open/close works
+- [ ] Drawer validation/error notice renders inside drawer footer notice area
+- [ ] Loading guard prevents double-submit on drawer primary action
+- [ ] Mobile width drawer body scroll works (no stuck content)
+- [ ] `npm run typecheck` pass
+- [ ] `npm run build` pass
+- [ ] AGENTS.md freeze marker added after verification
