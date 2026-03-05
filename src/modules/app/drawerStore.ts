@@ -54,7 +54,7 @@ export class AppDrawerStore extends AvBaseStore {
     return key ? this.drawerErrorByKey[key] : null;
   }
 
-  setLoading(action: DrawerActionKey, value: boolean) {
+  setActionLoading(action: DrawerActionKey, value: boolean) {
     this.loading[action] = Boolean(value);
   }
 
@@ -62,7 +62,7 @@ export class AppDrawerStore extends AvBaseStore {
     this.loading = defaultLoading();
   }
 
-  isLoading(action?: DrawerActionKey) {
+  isActionLoading(action?: DrawerActionKey) {
     if (action) return this.loading[action];
     return Object.values(this.loading).some(Boolean);
   }
