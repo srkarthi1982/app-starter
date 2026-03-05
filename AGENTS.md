@@ -116,6 +116,7 @@ Defined in `db/tables.ts`:
 - [ ] Build/typecheck green
 
 ## Task Log (Recent)
+- 2026-03-05 Rollout-plan clarification pass (docs-only): refined `docs/roadmap/app-starter-drawer-ux-integration.md` to remove ambiguity before execution freeze by explicitly defining scaffold boundary (`app-starter` copied components, not shared library), enforcing Av-components-only/no-new-primitives rule, tightening drawer store semantics (`activeDrawer`, scoped error strategy, loading model), and adding adoption-proof requirements (minimal demo route + verification checklist snippet).
 - 2026-03-05 Planning freeze prep: added `docs/roadmap/app-starter-drawer-ux-integration.md` as a planning-only rollout document for integrating Drawer UX Standard V1 into app-starter (goal, scaffold provisions, proposed folder/store patterns, CSS hooks, developer checklist integration, AGENTS governance logging, and post-baseline migration strategy for FlashNote/Study Planner/Quiz editor). No implementation code changes included.
 - 2026-03-01 Live-app shared UI sync: upgraded `@ansiversa/components` to `^0.0.163` (or confirmed already aligned in `web`) and refreshed install state for this repo. Verification: `npm run build` ✅.
 - Keep newest first; include date and short summary.
