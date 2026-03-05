@@ -32,6 +32,12 @@
   - Use `AppShell` for user-facing app routes.
   - Use admin layout contract for admin pages when admin scope exists.
   - Use shared layout/components only; no ad-hoc layout systems.
+- Layout & Component System Contract:
+  - All mini-app UI must use the shared Ansiversa component system.
+  - Use `AppShell` layout for all user-facing routes.
+  - Use shared Av components (`AvButton`, `AvDrawer`, and existing Av primitives).
+  - Do not introduce new design tokens or parallel component systems.
+  - Global styling must inherit from the shared `global.css` token system.
 - Top action area conventions:
   - Primary action must be singular and unambiguous.
   - Secondary actions must be visually subordinate.
@@ -84,6 +90,12 @@
   - Golden rule: "Refuse to store what you don't own."
   - Mini-app databases should only persist domain-owned data.
   - Parent-owned identity/auth/billing concerns must remain parent-sourced.
+- Parent Authentication Boundary:
+  - User identity and authentication are owned by the parent application.
+  - Mini-apps must validate sessions using the shared JWT contract.
+  - Mini-apps must not implement independent authentication systems.
+  - User identity is referenced via `userId` only.
+  - Authorization checks must rely on parent-provided identity context.
 
 ## 5) Dashboard + Admin Integration Baseline
 - Dashboard integration (non-negotiable where required by app contract):
