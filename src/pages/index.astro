@@ -1,9 +1,52 @@
 ---
 import { AvButton, AvCard, AvContainer } from "@ansiversa/components";
 import AppShell from "../layouts/AppShell.astro";
+import { APP_META } from "../app.meta";
+import { buildRootRedirect } from "../lib/redirects";
 
-const title = "Ansiversa App Starter";
-const description = "A golden mini-app starter with shared shells, auth guard, and example CRUD.";
+const rootAppUrl = Astro.locals.rootAppUrl ?? "https://ansiversa.com";
+const appUrl = new URL("/app", Astro.url).toString();
+const startHref = Astro.locals.isAuthenticated
+  ? "/app"
+  : buildRootRedirect(rootAppUrl, "/login", appUrl);
+const signInHref = buildRootRedirect(rootAppUrl, "/login", appUrl);
+
+const title = `${APP_META.name} | Ansiversa`;
+const description = "Public-first starter template for Ansiversa mini-apps with a clear landing page and protected /app entry.";
+
+const howItWorks = [
+  {
+    title: "Open the landing page",
+    description: "Start every mini-app with a clear public story, a strong value proposition, and a direct path into the product.",
+  },
+  {
+    title: "Authenticate through Ansiversa",
+    description: "Use the parent app for sign-in, then route authenticated users into /app without duplicating auth logic.",
+  },
+  {
+    title: "Replace the placeholders",
+    description: "Keep the shell, APP_META, and route baseline. Swap only the app-specific content and domain workflows.",
+  },
+];
+
+const benefitCards = [
+  {
+    title: "Proper app identity",
+    description: "APP_META defines the key, name, and description once so naming stays consistent across the starter.",
+  },
+  {
+    title: "Public-first UX baseline",
+    description: "Every future mini-app starts with a real landing page instead of a protected demo route.",
+  },
+  {
+    title: "Clean authenticated entry",
+    description: "The protected experience starts at /app, which makes auth flow, onboarding, and navigation predictable.",
+  },
+  {
+    title: "Safe starter foundation",
+    description: "Demo playground routes are removed so new apps begin from a lean baseline instead of legacy sample features.",
+  },
+];
 ---
 
 <AppShell title={title} description={description}>
@@ -13,33 +56,55 @@ const description = "A golden mini-app starter with shared shells, auth guard, a
         <AvCard className="av-auth-card">
           <div class="av-auth-stack-md">
             <div class="av-auth-stack-xs">
-              <p class="av-kicker">App Starter</p>
-              <h1 class="av-section-title">Build your next mini-app faster</h1>
+              <p class="av-kicker">{APP_META.name}</p>
+              <h1 class="av-section-title">Build premium Ansiversa mini-apps on a public-first baseline</h1>
               <p class="av-text-soft">
-                This repo is the official Ansiversa seed. It includes shared layout shells, auth
-                guard, notifications badge wiring, and a deletable Example Items module.
+                This starter ships with proper app identity, a production-ready landing page, and
+                a protected <code>/app</code> entry so future mini-apps start from the right UX
+                contract.
               </p>
             </div>
 
             <div class="av-row-wrap">
-              <AvButton href="/items">Open Example Items</AvButton>
-              <AvButton href="/admin/items" variant="ghost">Admin Items</AvButton>
+              <AvButton href={startHref}>Start</AvButton>
+              <AvButton href={signInHref} variant="ghost">Sign in</AvButton>
             </div>
           </div>
         </AvCard>
 
+        <div class="grid gap-4 md:grid-cols-3">
+          {howItWorks.map((step, index) => (
+            <AvCard variant="soft" className="av-auth-stack-sm">
+              <p class="av-kicker">Step {index + 1}</p>
+              <h2 class="av-card-heading">{step.title}</h2>
+              <p class="av-text-soft">{step.description}</p>
+            </AvCard>
+          ))}
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          {benefitCards.map((card) => (
+            <AvCard variant="soft" className="av-auth-stack-sm">
+              <h2 class="av-card-heading">{card.title}</h2>
+              <p class="av-text-soft">{card.description}</p>
+            </AvCard>
+          ))}
+        </div>
+
         <AvCard className="av-auth-card">
-          <div class="av-auth-stack-sm">
+          <div class="av-auth-stack-md">
             <div class="av-auth-stack-xs">
-              <p class="av-kicker">Developer Docs</p>
-              <h2 class="av-card-heading">Integration standards</h2>
+              <p class="av-kicker">Ready to ship</p>
+              <h2 class="av-section-title">Use this as the default baseline for every new mini-app</h2>
               <p class="av-text-soft">
-                Canonical implementation references for community developers and new mini-app builds.
+                Keep the public landing page on <code>/</code>, keep the authenticated product on
+                <code>/app</code>, and define app identity through <code>APP_META</code>.
               </p>
             </div>
+
             <div class="av-row-wrap">
-              <AvButton href="/docs">Open Developer Docs</AvButton>
-              <AvButton href="/docs/ai-integration" variant="ghost">AI Integration Standard</AvButton>
+              <AvButton href={startHref}>Open /app</AvButton>
+              <AvButton href={signInHref} variant="ghost">Sign in</AvButton>
             </div>
           </div>
         </AvCard>

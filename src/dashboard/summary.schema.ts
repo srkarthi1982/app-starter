@@ -1,43 +1,19 @@
-import { ExampleItem, count, db, desc, eq } from "astro:db";
+import { APP_META } from "../app.meta";
 
 export type AppStarterDashboardSummaryV1 = {
-  appId: "app-starter";
+  appId: typeof APP_META.key;
   version: 1;
   updatedAt: string;
-  itemsCount: number;
-  lastItemAt: string | null;
+  status: "ready";
+  primaryRoute: "/app";
 };
 
-const toIso = (value?: Date | string | null) => {
-  if (!value) return null;
-  if (value instanceof Date) return value.toISOString();
-  const parsed = new Date(value);
-  return Number.isNaN(parsed.getTime()) ? null : parsed.toISOString();
-};
-
-export const buildAppStarterSummary = async (userId: string): Promise<AppStarterDashboardSummaryV1> => {
-  const updatedAt = new Date().toISOString();
-
-  const [{ total: itemsRaw } = { total: 0 }] = await db
-    .select({ total: count() })
-    .from(ExampleItem)
-    .where(eq(ExampleItem.userId, userId));
-
-  const lastItemRow = await db
-    .select({ updatedAt: ExampleItem.updatedAt, createdAt: ExampleItem.createdAt })
-    .from(ExampleItem)
-    .where(eq(ExampleItem.userId, userId))
-    .orderBy(desc(ExampleItem.updatedAt), desc(ExampleItem.createdAt), desc(ExampleItem.id))
-    .limit(1);
-
-  const lastItemAt =
-    toIso(lastItemRow?.[0]?.updatedAt) ?? toIso(lastItemRow?.[0]?.createdAt) ?? null;
-
+export const buildAppStarterSummary = async (): Promise<AppStarterDashboardSummaryV1> => {
   return {
-    appId: "app-starter",
+    appId: APP_META.key,
     version: 1,
-    updatedAt,
-    itemsCount: Number(itemsRaw ?? 0),
-    lastItemAt,
+    updatedAt: new Date().toISOString(),
+    status: "ready",
+    primaryRoute: "/app",
   };
 };

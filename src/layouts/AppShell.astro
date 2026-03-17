@@ -3,7 +3,8 @@ import "@ansiversa/components/styles/global.css";
 import "../styles/global.css";
 import { WebLayout as AvWebLayout } from "@ansiversa/components";
 import { SESSION_COOKIE_NAME, verifySessionToken } from "../lib/auth";
-import { APP_KEY } from "../app.meta";
+import AppMiniAppBar from "../components/AppMiniAppBar.astro";
+import { APP_META } from "../app.meta";
 
 interface Props {
   title?: string;
@@ -71,17 +72,14 @@ if (cookieHeader && (locals?.isAuthenticated || user)) {
 
 const miniAppLinks = [
   { label: "Home", href: "/" },
-  { label: "Items", href: "/items" },
-  { label: "Help", href: "/help" },
+  { label: "App", href: "/app" },
 ];
 ---
 
 <AvWebLayout
   {...props}
   notificationUnreadCount={notificationUnreadCount}
-  miniAppKey={APP_KEY}
-  links={miniAppLinks}
-  bookmarksHref="/bookmarks"
 >
+  <AppMiniAppBar appKey={APP_META.key} appName={APP_META.name} links={miniAppLinks} />
   <slot />
 </AvWebLayout>

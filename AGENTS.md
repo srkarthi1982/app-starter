@@ -19,7 +19,7 @@ This file records what was built/changed so far for the app-starter repo. Read f
 - Shared layouts: `AppShell.astro` and `AppAdminShell.astro`.
 - Notification unread count fetched in AppShell via parent API (SSR).
 - One global Alpine store per app pattern.
- - Includes Example Items CRUD (user + admin) and a minimal starter landing.
+- V2 baseline uses `APP_META` for app identity, a public landing page at `/`, and a protected app entry at `/app`.
 
 ---
 
@@ -41,11 +41,20 @@ Delete this module and the routes when starting a real app.
 
 Defined in `db/tables.ts`:
 
-- `ExampleItem`
+- Starter baseline currently ships with no demo tables.
+
+## V2 Baseline Rules
+
+All apps must:
+- Use `APP_META` for identity
+- Have a public landing page at `/`
+- Use `/app` as the authenticated entry
 
 ---
 
 ## 4. Task Log (Newest first)
+
+- 2026-03-17 Upgraded app-starter to V2 standard: added `APP_META` identity contract, replaced shared app-title fallback with starter-level registry -> `APP_META.name` -> slug logic, shipped public-first landing on `/`, added protected `/app` entry, removed demo/example/admin/docs/bookmarks routes and related example code, and updated auth redirects to default into `/app`.
 
 - 2026-02-02 Corrected notifications payload contract and tightened billing/webhook/unread-count rules in APPSTARTER-INTEGRATIONS.md.
 - 2026-02-02 Updated APPSTARTER-INTEGRATIONS.md with bootstrap rules, contracts, cleanup, and checklist clarifications.
@@ -116,6 +125,7 @@ Defined in `db/tables.ts`:
 - [ ] Build/typecheck green
 
 ## Task Log (Recent)
+- 2026-03-17 V2 starter baseline locked: all apps must use `APP_META` for identity, ship a public landing page at `/`, and use `/app` as the authenticated entry route.
 - 2026-03-09 Git hygiene update: added `.env.vercel.production` to repo `.gitignore` so local Vercel env pull files stay untracked by default.
 - 2026-03-06 Mini-App Blueprint V1 Locked: architecture baseline for all Ansiversa mini-apps finalized in `docs/standards/mini-app-blueprint-v1.md`. Defines page contracts, drawer workflow contracts, store/action patterns, dashboard integration baseline, verification checklist, and governance rules.
 - 2026-03-06 Blueprint boundary clarification pass (planning-only): updated `docs/standards/mini-app-blueprint-v1.md` with explicit `Layout & Component System Contract` (AppShell + Av components only, no parallel primitives/tokens, shared `global.css` inheritance) and `Parent Authentication Boundary` (parent-owned identity, shared JWT validation, no independent mini-app auth, `userId`-based identity reference, parent-context authorization).

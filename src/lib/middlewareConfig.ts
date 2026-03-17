@@ -23,8 +23,8 @@ export const middlewareConfig: MiddlewareConfig = {
   routeProtection: {
     mode: "protectMost",
     publicRoutes: new Set(["/", "/login", "/register", "/forgot-password", "/reset", "/reset-password"]),
-    protectedPrefixes: ["/app", "/admin"],
-    apiBypassRoutes: new Set(["/api/faqs.json"]),
+    protectedPrefixes: ["/app"],
+    apiBypassRoutes: new Set([]),
   },
   extraPublicPathPrefixes: [],
   devBypass: {

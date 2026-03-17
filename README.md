@@ -1,8 +1,8 @@
 # Ansiversa App Starter
 
 This repo is the official starter template for Ansiversa mini-apps. It contains the standard
-middleware auth guard, shared AppShell/AppAdminShell layouts, unread notifications badge wiring,
-and a small Example Items module that demonstrates end-to-end CRUD.
+middleware auth guard, shared AppShell layout, unread notifications badge wiring, a public landing
+page at `/`, and a protected app entry at `/app`.
 
 ## Freeze status
 
@@ -70,7 +70,7 @@ DEV_BYPASS_ROLE_ID=1
 ⚠️ This bypass only works in local development (import.meta.env.DEV) and is ignored in
 production builds.
 
-After starting the dev server, open a protected route like `/items` or `/admin/items`
+After starting the dev server, open a protected route like `/app`
 to confirm the dummy session is active.
 
 ## First run checklist
@@ -78,8 +78,8 @@ to confirm the dummy session is active.
 You should be able to:
 
 - Start the app with `npm run dev`
-- Open `/items` and see the Example Items list
-- Open `/admin/items` and access admin CRUD (roleId = 1)
+- Open `/` and see the public landing page
+- Open `/app` and confirm the authenticated entry works
 - See no redirects to the parent login when DEV_BYPASS_AUTH is enabled
 
 If this works, your setup is correct.
@@ -102,29 +102,27 @@ This starter intentionally uses file-based remote DB locally for consistency.
 `npm run dev` and `npm run build` run in `--remote` mode against `.astro/content.db`.
 Use `npm run db:push` as the single schema push command.
 
-## Example module
+## V2 standard baseline
 
-Example Items live under `src/modules/example-items/` with routes at:
+Every new mini-app should start with:
 
-- `/items`
-- `/items/[id]`
-- `/admin/items`
-
-Delete `src/modules/example-items/` and these routes when starting a real app.
+- `APP_META` as the single source of truth for app identity
+- A public landing page on `/`
+- A protected main app entry on `/app`
 
 ## Starting a new mini-app
 
 1) Clone this repo.
-2) Remove the Example Items module and routes.
-3) Add your domain tables/actions/pages.
+2) Update `src/app.meta.ts`.
+3) Replace the landing copy and `/app` placeholder content with your domain workflow.
 4) Keep shared shells + middleware patterns unchanged.
 
 ### Non-negotiable standards
 
 These files define the Ansiversa contract. Do not modify or replace them.
 
-- `src/layouts/AppShell.astro` and `src/layouts/AppAdminShell.astro`
-- `src/middleware.ts` auth guard + admin role gate
+- `src/layouts/AppShell.astro`
+- `src/middleware.ts` auth guard
 - AppShell unread notifications fetch (`/api/notifications/unread-count`)
 - One global Alpine store pattern (`src/alpine.ts`)
 - Always update `AGENTS.md` when completing a task

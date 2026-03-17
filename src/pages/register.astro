@@ -5,7 +5,7 @@ return Astro.redirect(
   buildRootRedirect(
     Astro.locals.rootAppUrl ?? "https://ansiversa.com",
     "/register",
-    getSafeReturnTo(Astro.url.searchParams.get("returnTo"), new URL("/", Astro.url).toString()),
+    getSafeReturnTo(Astro.url.searchParams.get("returnTo"), new URL("/app", Astro.url).toString()),
   ),
 );
 ---

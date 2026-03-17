@@ -13,7 +13,8 @@ This prevents repeated setup mistakes. Do this before any feature work.
 - [ ] Clone `app-starter` into the new repo folder
 - [ ] Remove old git origin, add new origin for the new repo
 - [ ] Reset `package.json` name, app key/slug, and `.env.example` values
-- [ ] Delete the Example Module (see section C)
+- [ ] Update `src/app.meta.ts`
+- [ ] Keep `/` as the public landing page and `/app` as the authenticated entry
 - [ ] First commit in the new repo
 - [ ] Run `npm run typecheck` + `npm run build` and log in `AGENTS.md`
 
@@ -59,23 +60,19 @@ These **must** ship with AppStarter so every mini-app is platform-ready.
   - [ ] Env: `ANSIVERSA_NOTIFICATIONS_WEBHOOK_SECRET` (optional)
   - [ ] Payload: `appId`, `userId`, `eventType`, `title`, `url`
 
-### 5) Admin Guard (Role-based)
-- [ ] `/admin` route guard using `roleId`
-- [ ] Standard redirect for non-admin users
-
-### 6) Shared Layout + UI Rules
+### 5) Shared Layout + UI Rules
 - [ ] Enforced AppShell/Av layout usage
 - [ ] `global.css` pattern for Tailwind compilation
 - [ ] Av components + tokens only
 
-### 7) Webhook hygiene (dashboard/notifications calls)
+### 6) Webhook hygiene (dashboard/notifications calls)
 - [ ] Short timeout enforced
 - [ ] Best-effort (non-blocking)
 - [ ] Never fail the user action if webhook fails; log and continue
 - [ ] Retry guidance (2–3 max with backoff)
 - [ ] Log failures with `appId`
 
-### 8) Versioning policy (minimum)
+### 7) Versioning policy (minimum)
 - [ ] Summary JSON versioned
 - [ ] Schema change rule: bump version + maintain backward-compatible rendering in parent
 
@@ -111,12 +108,11 @@ These are recommended **drop-in modules** or guidance. Do not wire by default in
 
 ---
 
-## C) Cleanup before real app
+## C) Starter route baseline
 
-- [ ] Delete Example Module:
-  - [ ] `src/modules/example-items/`
-  - [ ] Routes: `/items`, `/items/[id]`, `/admin/items`
-- [ ] Remove temporary debug pages before release (or guard behind DEV flag)
+- [ ] Keep `/` public
+- [ ] Keep `/app` protected
+- [ ] Do not add demo playground routes to the starter baseline
 
 ---
 
