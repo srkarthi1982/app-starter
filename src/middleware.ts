@@ -3,7 +3,13 @@ import { SESSION_COOKIE_NAME, verifySessionToken } from "./lib/auth";
 import { middlewareConfig } from "./lib/middlewareConfig";
 
 const STATIC_PREFIXES = ["/_astro/", "/assets/", "/icons/", "/images/"];
-const STATIC_EXACT = new Set(["/robots.txt", "/manifest.webmanifest", "/apple-touch-icon.png", "/favicon.ico"]);
+const STATIC_EXACT = new Set([
+  "/robots.txt",
+  "/manifest.webmanifest",
+  "/apple-touch-icon.png",
+  "/favicon.ico",
+  "/favicon.svg",
+]);
 const FAVICON_PNG_PATTERN = /^\/favicon-[^/]+\.png$/i;
 
 const COOKIE_DOMAIN = import.meta.env.ANSIVERSA_COOKIE_DOMAIN ?? (import.meta.env.DEV ? "localhost" : undefined);

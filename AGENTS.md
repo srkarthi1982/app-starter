@@ -54,6 +54,8 @@ All apps must:
 
 ## 4. Task Log (Newest first)
 
+- 2026-03-18 Full verification sweep (pre-launch): audited all live routes/flows (public landing, protected `/app`, auth redirects, notification proxy, middleware route/static handling), ran typecheck/build, fixed low-risk static asset auth issue by allowlisting `/favicon.svg`, and documented launch-review findings for founder/Astra follow-up.
+
 - 2026-03-17 Upgraded app-starter to V2 standard: added `APP_META` identity contract, replaced shared app-title fallback with starter-level registry -> `APP_META.name` -> slug logic, shipped public-first landing on `/`, added protected `/app` entry, removed demo/example/admin/docs/bookmarks routes and related example code, and updated auth redirects to default into `/app`.
 
 - 2026-02-02 Corrected notifications payload contract and tightened billing/webhook/unread-count rules in APPSTARTER-INTEGRATIONS.md.
@@ -125,6 +127,7 @@ All apps must:
 - [ ] Build/typecheck green
 
 ## Task Log (Recent)
+- 2026-03-18 Full verification sweep (pre-launch): audited all live routes/flows (public landing, protected `/app`, auth redirects, notification proxy, middleware route/static handling), ran typecheck/build, fixed low-risk static asset auth issue by allowlisting `/favicon.svg`, and documented launch-review findings for founder/Astra follow-up.
 - 2026-03-17 V2 starter baseline locked: all apps must use `APP_META` for identity, ship a public landing page at `/`, and use `/app` as the authenticated entry route.
 - 2026-03-09 Git hygiene update: added `.env.vercel.production` to repo `.gitignore` so local Vercel env pull files stay untracked by default.
 - 2026-03-06 Mini-App Blueprint V1 Locked: architecture baseline for all Ansiversa mini-apps finalized in `docs/standards/mini-app-blueprint-v1.md`. Defines page contracts, drawer workflow contracts, store/action patterns, dashboard integration baseline, verification checklist, and governance rules.
