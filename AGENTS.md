@@ -128,6 +128,7 @@ All apps must:
 
 ## Task Log (Recent)
 - 2026-03-18 Full verification sweep (pre-launch): audited all live routes/flows (public landing, protected `/app`, auth redirects, notification proxy, middleware route/static handling), ran typecheck/build, fixed low-risk static asset auth issue by allowlisting `/favicon.svg`, and documented launch-review findings for founder/Astra follow-up.
+- 2026-03-18 Components lock sync: upgraded `@ansiversa/components` to `^0.0.169` and refreshed the lockfile for the pre-launch ecosystem lock. Verification: `npm run typecheck` ✅, `npm run build` ✅.
 - 2026-03-17 V2 starter baseline locked: all apps must use `APP_META` for identity, ship a public landing page at `/`, and use `/app` as the authenticated entry route.
 - 2026-03-09 Git hygiene update: added `.env.vercel.production` to repo `.gitignore` so local Vercel env pull files stay untracked by default.
 - 2026-03-06 Mini-App Blueprint V1 Locked: architecture baseline for all Ansiversa mini-apps finalized in `docs/standards/mini-app-blueprint-v1.md`. Defines page contracts, drawer workflow contracts, store/action patterns, dashboard integration baseline, verification checklist, and governance rules.
