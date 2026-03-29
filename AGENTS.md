@@ -54,6 +54,7 @@ All apps must:
 
 ## 4. Task Log (Newest first)
 
+- 2026-03-29 Hardened starter notification/auth baseline for downstream mini-apps by removing a stale source comment and defaulting parent notifications to `APP_KEY` when callers omit `appKey`.
 - 2026-03-18 Full verification sweep (pre-launch): audited all live routes/flows (public landing, protected `/app`, auth redirects, notification proxy, middleware route/static handling), ran typecheck/build, fixed low-risk static asset auth issue by allowlisting `/favicon.svg`, and documented launch-review findings for founder/Astra follow-up.
 
 - 2026-03-17 Upgraded app-starter to V2 standard: added `APP_META` identity contract, replaced shared app-title fallback with starter-level registry -> `APP_META.name` -> slug logic, shipped public-first landing on `/`, added protected `/app` entry, removed demo/example/admin/docs/bookmarks routes and related example code, and updated auth redirects to default into `/app`.
